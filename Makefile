@@ -1,11 +1,14 @@
 all: dep
 	sudo docker-compose -f srcs/docker-compose.yml up -d
 
-docker:
-	sudo apt-get update
-	sudo apt-get intall -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+re: dep
+	sudo docker-compose -f srcs/docker-compose.yml up -d --build
+
+clean:
+	sudo docker-compose -f srcs/docker-compose.yml down --rmi all -v
 
 dep:
-	mkdir -p /home/lbonnefo/data/mariadb_data
+	mkdir -p /home/lbonnefo/data/maria-db_data
+	mkdir -p /home/lbonnefo/data/wordpress_data
 
-.PHONY: all docker dep
+.PHONY: all docker dep clean

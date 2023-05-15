@@ -5,8 +5,8 @@ RUN rm -rf /var/lib/apt/lists/*
 
 EXPOSE 3306
 
-RUN mkdir -p run/mysqld
-RUN chown -R mysql:mysql run/mysql
+RUN mkdir -p /run/mysqld
+RUN chown -R mysql:mysql /run/mysqld
 
 COPY tools/db_create.sql /
 COPY tools/run.sh /
