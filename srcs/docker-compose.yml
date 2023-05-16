@@ -6,13 +6,12 @@ volumes:
       type: none
       device: /home/lbonnefo/data/maria-db_data
       o: bind
-    wordpress_data:
+  wordpress_data:
     driver: local
     driver_opts:
       type: none
       device: /home/lbonnefo/data/wordpress_data
       o: bind
-  
 
 services:
   maria-db:
@@ -24,6 +23,19 @@ services:
       - .env
     volumes:
       - maria-db_data:/var/lib/mysql
+    restart: always
+
+  wordpress:
+    build: requirements/wordpress
+    image: wordpress
+    networks:
+      - inception
+    volumes:
+      - wordpress_data:/var/www/html
+    depends_on:
+      - maria-db
+    env_file:
+      - .env
     restart: always
 
   nginx:
@@ -38,17 +50,6 @@ services:
     depends_on:
       - wordpress
     restart: always
-
-    wordpress:
-      build: requirements/wordpress
-      image: wordpress
-      networks:
-        - inception
-      volumes:
-        - wordpress_data:/var/www/html
-      env_file:
-        - .env
-      restart: always
 
 networks:
   inception:
