@@ -11,6 +11,7 @@ wp core download \
     --path=/var/www/html \
     --allow-root
 
+echo '1'
 # Create the wp-config.php file
 wp config create \
     --path=/var/www/html \
@@ -20,6 +21,7 @@ wp config create \
     --dbpass=$MARIADB_PASSWORD \
     --allow-root
 
+echo '2'
 # Install WordPress
 wp core install \
     --path=/var/www/html \
@@ -30,6 +32,7 @@ wp core install \
     --admin_email=$WORDPRESS_ROOT_EMAIL \
     --allow-root
 
+echo '3'
 # Create random user
 wp user create \
     $WORDPRESS_USER $WORDPRESS_USER_EMAIL \
