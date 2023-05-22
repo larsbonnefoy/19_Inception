@@ -1,6 +1,6 @@
 FROM debian:buster
 
-RUN apt update && apt install -y mariadb-server moreutils gettext mariadb-client
+RUN apt-get update && apt-get install -y mariadb-server moreutils gettext mariadb-client
 RUN rm -rf /var/lib/apt/lists/*
 
 RUN mkdir -p /run/mysqld
